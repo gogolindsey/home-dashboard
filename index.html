@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Dashboard</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+               "Segoe UI", sans-serif;
+  color: #f5f4ef;
+  background:
+    radial-gradient(circle at 18% 8%, rgba(101,115,104,.28), transparent 34%),
+    radial-gradient(circle at 88% 90%, rgba(98,84,72,.22), transparent 36%),
+    #111513;
+}
+
+.dashboard {
+  height: 100vh;
+  width: 100vw;
+  padding: 28px 32px;
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  background: rgba(35,40,37,.76);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 30px;
+  padding: 26px 28px;
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.04);
+  backdrop-filter: blur(18px);
+}
+
+.leftTop {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: space-between;
+}
+
+.time {
+  font-size: clamp(68px, 9vw, 118px);
+  font-weight: 300;
+  letter-spacing: -5px;
+  line-height: .9;
+}
+
+.date {
+  margin-top: 15px;
+  font-size: clamp(22px, 2.5vw, 34px);
+  color: #b9c0bb;
+  font-weight: 400;
+}
+
+.weatherRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.temp {
+  font-size: clamp(48px, 6vw, 78px);
+  font-weight: 300;
+}
+
+.weatherDescription {
+  font-size: 22px;
+  color: #d7dbd8;
+  margin-top: 4px;
+}
+
+.weatherDetails {
+  text-align: right;
+  color: #b8c0bb;
+  font-size: 19px;
+  line-height: 1.55;
+}
+
+.label {
+  text-transform: uppercase;
+  letter-spacing: 2.4px;
+  font-size: 13px;
+  color: #89938d;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.camera {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cameraView {
+  flex: 1;
+  min-height: 0;
+  border-radius: 22px;
+  background:
+    linear-gradient(145deg, #1a211e, #0b0e0d);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.doorIcon {
+  font-size: 50px;
+  opacity: .7;
+  margin-bottom: 12px;
+}
+
+.cameraTitle {
+  font-size: 25px;
+}
+
+.cameraSub {
+  margin-top: 7px;
+  color: #89928d;
+  font-size: 16px;
+}
+
+.temps {
+  display: flex;
+  flex-direction: column;
+}
+
+.tempRooms {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  flex: 1;
+}
+
+.room {
+  background: rgba(255,255,255,.045);
+  border-radius: 22px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.roomName {
+  color: #aab2ad;
+  font-size: 18px;
+}
+
+.roomTemp {
+  font-size: clamp(42px, 5vw, 65px);
+  font-weight: 300;
+  margin-top: 5px;
+}
+
+.quoteCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.quoteMark {
+  font-family: Georgia, serif;
+  font-size: 60px;
+  color: #7f9286;
+  line-height: .6;
+}
+
+.quote {
+  font-family: Georgia, serif;
+  font-size: clamp(23px, 2.5vw, 34px);
+  line-height: 1.25;
+  color: #eceae3;
+}
+
+.author {
+  margin-top: 15px;
+  color: #929c96;
+  font-size: 17px;
+}
+
+.alert {
+  display: none;
+  margin-top: 17px;
+  padding: 12px 15px;
+  border-radius: 15px;
+  background: rgba(161,92,68,.23);
+  color: #f2c6b8;
+  font-size: 16px;
+}
+
+@media (max-width: 800px) {
+  .dashboard {
+    padding: 18px;
+    gap: 14px;
+  }
+
+  .card {
+    border-radius: 24px;
+    padding: 21px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <section class="card leftTop">
+
+    <div>
+      <div class="time" id="time">6:05</div>
+      <div class="date" id="date">Sunday, August 23</div>
+    </div>
+
+    <div>
+      <div class="weatherRow">
+
+        <div>
+          <div class="temp" id="temperature">--°</div>
+          <div class="weatherDescription" id="conditions">
+            Santa Clarita
+          </div>
+        </div>
+
+        <div class="weatherDetails">
+          <div id="highLow">H --° &nbsp; L --°</div>
+          <div id="wind">Wind --</div>
+        </div>
+
+      </div>
+
+      <div class="alert" id="alert"></div>
+    </div>
+
+  </section>
+
+
+  <section class="card camera">
+
+    <div class="label">Front Door</div>
+
+    <div class="cameraView">
+      <div>
+        <div class="doorIcon">⌂</div>
+        <div class="cameraTitle">Front Door</div>
+        <div class="cameraSub">
+          Alexa camera stream
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <section class="card temps">
+
+    <div class="label">Inside</div>
+
+    <div class="tempRooms">
+
+      <div class="room">
+        <div class="roomName">Downstairs</div>
+        <div class="roomTemp" id="downstairs">--°</div>
+      </div>
+
+      <div class="room">
+        <div class="roomName">Upstairs</div>
+        <div class="roomTemp" id="upstairs">--°</div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="card quoteCard">
+
+    <div class="label">Thought for Today</div>
+
+    <div>
+      <div class="quoteMark">“</div>
+      <div class="quote" id="quote"></div>
+      <div class="author" id="author"></div>
+    </div>
+
+  </section>
+
+</div>
+
+
+<script>
+
+/* CLOCK */
+
+function updateClock() {
+
+  const now = new Date();
+
+  document.getElementById("time").textContent =
+    now.toLocaleTimeString([], {
+      hour: "numeric",
+      minute: "2-digit"
+    });
+
+  document.getElementById("date").textContent =
+    now.toLocaleDateString([], {
+      weekday: "long",
+      month: "long",
+      day: "numeric"
+    });
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+
+
+/* DAILY QUOTES */
+
+const quotes = [
+
+  ["The best way out is always through.", "Robert Frost"],
+
+  ["Nothing is worth more than this day.", "Johann Wolfgang von Goethe"],
+
+  ["Wherever you go, go with all your heart.", "Confucius"],
+
+  ["The quieter you become, the more you are able to hear.", "Rumi"],
+
+  ["Life is a balance of holding on and letting go.", "Rumi"],
+
+  ["Act as if what you do makes a difference. It does.", "William James"],
+
+  ["What we think, we become.", "Often attributed to Buddha"],
+
+  ["It is never too late to be what you might have been.", "Often attributed to George Eliot"],
+
+  ["The creation of a thousand forests is in one acorn.", "Ralph Waldo Emerson"],
+
+  ["Turn your wounds into wisdom.", "Oprah Winfrey"]
+
+];
+
+const start = new Date(new Date().getFullYear(),0,0);
+const diff = new Date() - start;
+const day = Math.floor(diff / 86400000);
+
+const todaysQuote = quotes[day % quotes.length];
+
+document.getElementById("quote").textContent = todaysQuote[0];
+document.getElementById("author").textContent = "— " + todaysQuote[1];
+
+
+/* WEATHER
+   Approximate Santa Clarita coordinates
+*/
+
+const latitude = 34.3917;
+const longitude = -118.5426;
+
+async function loadWeather() {
+
+  try {
+
+    const point =
+      await fetch(
+        `https://api.weather.gov/points/${latitude},${longitude}`
+      ).then(r => r.json());
+
+    const forecastURL =
+      point.properties.forecastHourly;
+
+    const forecast =
+      await fetch(forecastURL).then(r => r.json());
+
+    const periods =
+      forecast.properties.periods;
+
+    const current =
+      periods[0];
+
+    document.getElementById("temperature").textContent =
+      current.temperature + "°";
+
+    document.getElementById("conditions").textContent =
+      current.shortForecast;
+
+    document.getElementById("wind").textContent =
+      "Wind " +
+      current.windSpeed +
+      " " +
+      current.windDirection;
+
+
+    /* Find approximate high and low
+       from next 24 hourly periods
+    */
+
+    const next24 =
+      periods.slice(0,24)
+        .map(p => p.temperature);
+
+    const high =
+      Math.max(...next24);
+
+    const low =
+      Math.min(...next24);
+
+    document.getElementById("highLow").textContent =
+      `H ${high}°   L ${low}°`;
+
+
+    /* WEATHER ALERTS */
+
+    const alertData =
+      await fetch(
+        `https://api.weather.gov/alerts/active?point=${latitude},${longitude}`
+      ).then(r => r.json());
+
+    if (alertData.features.length > 0) {
+
+      const alert =
+        alertData.features[0].properties;
+
+      const box =
+        document.getElementById("alert");
+
+      box.style.display = "block";
+      box.textContent =
+        "⚠ " + alert.event;
+
+    } else {
+
+      document.getElementById("alert").style.display =
+        "none";
+    }
+
+  }
+
+  catch(error) {
+
+    document.getElementById("conditions").textContent =
+      "Weather temporarily unavailable";
+
+  }
+}
+
+loadWeather();
+
+/* Refresh every 10 minutes */
+
+setInterval(loadWeather, 600000);
+
+</script>
+
+</body>
+</html>
