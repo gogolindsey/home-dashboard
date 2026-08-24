@@ -6,7 +6,9 @@
 <title>Home Dashboard</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 html, body {
   margin: 0;
@@ -23,63 +25,68 @@ html, body {
 }
 
 .dashboard {
-  height: 100vh;
   width: 100vw;
-  padding: 26px 30px;
+  height: 100vh;
+  padding: 18px;
   display: grid;
-  grid-template-columns: 1.15fr .85fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 20px;
+  grid-template-rows: 2fr 1fr;
+  gap: 16px;
 }
 
 .card {
-  background: rgba(35,40,37,.76);
+  background: rgba(35,40,37,.78);
   border: 1px solid rgba(255,255,255,.09);
-  border-radius: 30px;
-  padding: 24px 28px;
+  border-radius: 28px;
   box-shadow:
     0 18px 45px rgba(0,0,0,.18),
     inset 0 1px 0 rgba(255,255,255,.04);
   backdrop-filter: blur(18px);
 }
 
-.leftTop {
+/* TOP CARD */
+
+.topCard {
+  padding: 24px 26px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .time {
-  font-size: clamp(100px, 13vw, 170px);
-  font-weight: 250;
-  letter-spacing: -8px;
+  font-size: clamp(92px, 18vw, 150px);
+  font-weight: 220;
+  letter-spacing: -7px;
   line-height: .82;
   white-space: nowrap;
 }
 
 .date {
   margin-top: 18px;
-  font-size: clamp(22px, 2.4vw, 34px);
+  font-size: clamp(22px, 3.1vw, 30px);
   color: #b9c0bb;
   font-weight: 400;
+}
+
+.weatherArea {
+  margin-top: 18px;
 }
 
 .weatherRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
+  gap: 14px;
 }
 
 .weatherMain {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
 }
 
 .weatherIcon {
-  width: clamp(62px, 7vw, 92px);
-  height: clamp(62px, 7vw, 92px);
+  width: clamp(62px, 10vw, 88px);
+  height: clamp(62px, 10vw, 88px);
   color: rgba(245,244,239,.92);
   flex: 0 0 auto;
 }
@@ -91,28 +98,28 @@ html, body {
 }
 
 .temp {
-  font-size: clamp(46px, 5.5vw, 72px);
+  font-size: clamp(48px, 8vw, 72px);
   font-weight: 300;
   line-height: 1;
 }
 
 .weatherDescription {
-  font-size: 20px;
+  font-size: clamp(18px, 2.8vw, 23px);
   color: #d7dbd8;
-  margin-top: 5px;
+  margin-top: 6px;
 }
 
 .weatherDetails {
   text-align: right;
   color: #b8c0bb;
-  font-size: 18px;
+  font-size: clamp(16px, 2.5vw, 20px);
   line-height: 1.55;
 }
 
 .alert {
   display: none;
-  margin-top: 14px;
-  padding: 13px 17px;
+  margin-top: 16px;
+  padding: 14px 18px;
   border-radius: 16px;
   background: linear-gradient(
     135deg,
@@ -121,90 +128,15 @@ html, body {
   );
   border: 1px solid rgba(255,220,200,.24);
   color: #fff7f1;
-  font-size: 17px;
-  font-weight: 600;
+  font-size: clamp(15px, 2.4vw, 18px);
+  font-weight: 650;
   box-shadow: 0 8px 25px rgba(90,35,20,.3);
 }
 
-.camera {
-  display: flex;
-  flex-direction: column;
-}
-
-.cameraView {
-  flex: 1;
-  min-height: 0;
-  border-radius: 22px;
-  background: linear-gradient(145deg, #1a211e, #0b0e0d);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.alexaIcon {
-  width: 58px;
-  height: 58px;
-  margin: 0 auto 12px;
-  border: 2px solid rgba(245,244,239,.75);
-  border-radius: 50%;
-  position: relative;
-}
-
-.alexaIcon::after {
-  content: "";
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  border: 2px solid rgba(245,244,239,.55);
-  border-radius: 50%;
-  top: 15px;
-  left: 15px;
-}
-
-.cameraTitle {
-  font-size: 25px;
-}
-
-.cameraSub {
-  margin-top: 8px;
-  color: #89928d;
-  font-size: 16px;
-}
-
-.temps {
-  display: flex;
-  flex-direction: column;
-}
-
-.tempRooms {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  flex: 1;
-}
-
-.room {
-  background: rgba(255,255,255,.045);
-  border-radius: 22px;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.roomName {
-  color: #aab2ad;
-  font-size: 18px;
-}
-
-.roomTemp {
-  font-size: clamp(42px, 5vw, 65px);
-  font-weight: 300;
-  margin-top: 5px;
-}
+/* QUOTE CARD */
 
 .quoteCard {
+  padding: 24px 26px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -212,42 +144,51 @@ html, body {
 
 .label {
   text-transform: uppercase;
-  letter-spacing: 2.4px;
+  letter-spacing: 2.5px;
   font-size: 13px;
   color: #89938d;
-  font-weight: 600;
-  margin-bottom: 16px;
+  font-weight: 650;
 }
 
 .quoteMark {
   font-family: Georgia, serif;
-  font-size: 60px;
+  font-size: 58px;
   color: #7f9286;
-  line-height: .6;
+  line-height: .65;
+  margin-top: 8px;
 }
 
 .quote {
   font-family: Georgia, serif;
-  font-size: clamp(22px, 2.4vw, 32px);
-  line-height: 1.25;
+  font-size: clamp(24px, 4vw, 34px);
+  line-height: 1.18;
   color: #eceae3;
+  margin-top: 4px;
 }
 
 .author {
   margin-top: 14px;
   color: #929c96;
-  font-size: 17px;
+  font-size: clamp(15px, 2.4vw, 18px);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
   .dashboard {
-    padding: 16px;
-    gap: 13px;
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .topCard,
+  .quoteCard {
+    padding: 20px;
   }
 
   .card {
     border-radius: 24px;
-    padding: 20px;
+  }
+
+  .weatherRow {
+    align-items: flex-end;
   }
 }
 </style>
@@ -257,14 +198,14 @@ html, body {
 
 <div class="dashboard">
 
-  <section class="card leftTop">
+  <section class="card topCard">
 
     <div>
-      <div class="time" id="time">8:26</div>
+      <div class="time" id="time">11:06 AM</div>
       <div class="date" id="date">Monday, August 24</div>
     </div>
 
-    <div>
+    <div class="weatherArea">
 
       <div class="weatherRow">
 
@@ -295,44 +236,6 @@ html, body {
   </section>
 
 
-  <section class="card camera">
-
-    <div class="label">Alexa</div>
-
-    <div class="cameraView">
-      <div>
-        <div class="alexaIcon"></div>
-        <div class="cameraTitle">Alexa is ready</div>
-        <div class="cameraSub">
-          “Alexa, show me the Front Door”
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-
-  <section class="card temps">
-
-    <div class="label">Inside</div>
-
-    <div class="tempRooms">
-
-      <div class="room">
-        <div class="roomName">Downstairs</div>
-        <div class="roomTemp" id="downstairs">--°</div>
-      </div>
-
-      <div class="room">
-        <div class="roomName">Upstairs</div>
-        <div class="roomTemp" id="upstairs">--°</div>
-      </div>
-
-    </div>
-
-  </section>
-
-
   <section class="card quoteCard">
 
     <div class="label">Thought for Today</div>
@@ -349,6 +252,8 @@ html, body {
 
 
 <script>
+
+/* CLOCK */
 
 function updateClock() {
   const now = new Date();
@@ -371,6 +276,8 @@ updateClock();
 setInterval(updateClock, 1000);
 
 
+/* QUOTES */
+
 const quotes = [
   ["The best way out is always through.", "Robert Frost"],
   ["Nothing is worth more than this day.", "Johann Wolfgang von Goethe"],
@@ -392,9 +299,10 @@ document.getElementById("quote").textContent = todaysQuote[0];
 document.getElementById("author").textContent = "— " + todaysQuote[1];
 
 
+/* WEATHER */
+
 const latitude = 34.3917;
 const longitude = -118.5426;
-
 
 function svgWrap(content) {
   return `
