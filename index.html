@@ -43,8 +43,6 @@ html, body {
   backdrop-filter: blur(18px);
 }
 
-/* CLOCK + WEATHER */
-
 .leftTop {
   display: flex;
   flex-direction: column;
@@ -80,9 +78,16 @@ html, body {
 }
 
 .weatherIcon {
-  font-size: clamp(54px, 6vw, 80px);
-  line-height: 1;
-  filter: drop-shadow(0 5px 10px rgba(0,0,0,.2));
+  width: clamp(62px, 7vw, 92px);
+  height: clamp(62px, 7vw, 92px);
+  color: rgba(245,244,239,.92);
+  flex: 0 0 auto;
+}
+
+.weatherIcon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .temp {
@@ -104,8 +109,6 @@ html, body {
   line-height: 1.55;
 }
 
-/* WEATHER ALERT */
-
 .alert {
   display: none;
   margin-top: 14px;
@@ -113,17 +116,15 @@ html, body {
   border-radius: 16px;
   background: linear-gradient(
     135deg,
-    rgba(178, 94, 55, .95),
-    rgba(137, 62, 45, .95)
+    rgba(176, 82, 52, .96),
+    rgba(123, 48, 37, .96)
   );
-  border: 1px solid rgba(255,210,180,.28);
-  color: #fff4ec;
+  border: 1px solid rgba(255,220,200,.24);
+  color: #fff7f1;
   font-size: 17px;
   font-weight: 600;
   box-shadow: 0 8px 25px rgba(90,35,20,.3);
 }
-
-/* FRONT DOOR / ALEXA */
 
 .camera {
   display: flex;
@@ -142,8 +143,23 @@ html, body {
 }
 
 .alexaIcon {
-  font-size: 52px;
-  margin-bottom: 10px;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 12px;
+  border: 2px solid rgba(245,244,239,.75);
+  border-radius: 50%;
+  position: relative;
+}
+
+.alexaIcon::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(245,244,239,.55);
+  border-radius: 50%;
+  top: 15px;
+  left: 15px;
 }
 
 .cameraTitle {
@@ -155,8 +171,6 @@ html, body {
   color: #89928d;
   font-size: 16px;
 }
-
-/* INDOOR TEMPERATURES */
 
 .temps {
   display: flex;
@@ -189,8 +203,6 @@ html, body {
   font-weight: 300;
   margin-top: 5px;
 }
-
-/* QUOTE */
 
 .quoteCard {
   display: flex;
@@ -258,7 +270,7 @@ html, body {
 
         <div class="weatherMain">
 
-          <div class="weatherIcon" id="weatherIcon">☀️</div>
+          <div class="weatherIcon" id="weatherIcon"></div>
 
           <div>
             <div class="temp" id="temperature">--°</div>
@@ -289,7 +301,7 @@ html, body {
 
     <div class="cameraView">
       <div>
-        <div class="alexaIcon">◉</div>
+        <div class="alexaIcon"></div>
         <div class="cameraTitle">Alexa is ready</div>
         <div class="cameraSub">
           “Alexa, show me the Front Door”
@@ -338,10 +350,7 @@ html, body {
 
 <script>
 
-/* CLOCK */
-
 function updateClock() {
-
   const now = new Date();
 
   document.getElementById("time").textContent =
@@ -361,8 +370,6 @@ function updateClock() {
 updateClock();
 setInterval(updateClock, 1000);
 
-
-/* DAILY QUOTES */
 
 const quotes = [
   ["The best way out is always through.", "Robert Frost"],
@@ -385,55 +392,149 @@ document.getElementById("quote").textContent = todaysQuote[0];
 document.getElementById("author").textContent = "— " + todaysQuote[1];
 
 
-/* WEATHER */
-
 const latitude = 34.3917;
 const longitude = -118.5426;
 
 
-/* CHOOSE WEATHER ICON */
+function svgWrap(content) {
+  return `
+    <svg viewBox="0 0 64 64"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2.2"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         aria-hidden="true">
+      ${content}
+    </svg>
+  `;
+}
+
+function iconSunny() {
+  return svgWrap(`
+    <circle cx="32" cy="32" r="10"></circle>
+    <path d="M32 8v8"></path>
+    <path d="M32 48v8"></path>
+    <path d="M8 32h8"></path>
+    <path d="M48 32h8"></path>
+    <path d="M15 15l6 6"></path>
+    <path d="M43 43l6 6"></path>
+    <path d="M49 15l-6 6"></path>
+    <path d="M21 43l-6 6"></path>
+  `);
+}
+
+function iconCloudy() {
+  return svgWrap(`
+    <path d="M18 43h27a9 9 0 0 0 0-18
+             14 14 0 0 0-26-4
+             10 10 0 0 0-1 22z"></path>
+  `);
+}
+
+function iconPartlyCloudy() {
+  return svgWrap(`
+    <circle cx="24" cy="22" r="8"></circle>
+    <path d="M24 6v5"></path>
+    <path d="M24 33v5"></path>
+    <path d="M8 22h5"></path>
+    <path d="M35 22h5"></path>
+    <path d="M13 11l4 4"></path>
+    <path d="M31 29l4 4"></path>
+
+    <path d="M19 46h28a8 8 0 0 0 0-16
+             13 13 0 0 0-24-3
+             9 9 0 0 0-4 19z"></path>
+  `);
+}
+
+function iconRain() {
+  return svgWrap(`
+    <path d="M18 34h27a9 9 0 0 0 0-18
+             14 14 0 0 0-26-4
+             10 10 0 0 0-1 22z"></path>
+    <path d="M24 42l-3 7"></path>
+    <path d="M34 42l-3 7"></path>
+    <path d="M44 42l-3 7"></path>
+  `);
+}
+
+function iconStorm() {
+  return svgWrap(`
+    <path d="M18 32h27a9 9 0 0 0 0-18
+             14 14 0 0 0-26-4
+             10 10 0 0 0-1 22z"></path>
+    <path d="M34 36l-6 11h7l-4 10 12-14h-7l4-7z"></path>
+  `);
+}
+
+function iconFog() {
+  return svgWrap(`
+    <path d="M18 29h27a9 9 0 0 0 0-18
+             14 14 0 0 0-26-4
+             10 10 0 0 0-1 22z"></path>
+    <path d="M12 38h40"></path>
+    <path d="M16 45h32"></path>
+    <path d="M21 52h22"></path>
+  `);
+}
+
+function iconSnow() {
+  return svgWrap(`
+    <path d="M18 28h27a9 9 0 0 0 0-18
+             14 14 0 0 0-26-4
+             10 10 0 0 0-1 22z"></path>
+
+    <path d="M24 39v14"></path>
+    <path d="M18 42l12 8"></path>
+    <path d="M30 42l-12 8"></path>
+
+    <path d="M42 39v14"></path>
+    <path d="M36 42l12 8"></path>
+    <path d="M48 42l-12 8"></path>
+  `);
+}
 
 function chooseWeatherIcon(description) {
-
   const text = description.toLowerCase();
 
-  if (text.includes("thunder")) return "⛈️";
+  if (text.includes("thunder")) return iconStorm();
 
   if (
     text.includes("snow") ||
     text.includes("sleet") ||
     text.includes("ice")
-  ) return "🌨️";
+  ) return iconSnow();
 
   if (
     text.includes("rain") ||
     text.includes("shower") ||
     text.includes("drizzle")
-  ) return "🌧️";
+  ) return iconRain();
 
   if (
     text.includes("fog") ||
     text.includes("haze") ||
     text.includes("mist")
-  ) return "🌫️";
+  ) return iconFog();
 
   if (
     text.includes("partly cloudy") ||
     text.includes("mostly sunny") ||
     text.includes("partly sunny")
-  ) return "🌤️";
+  ) return iconPartlyCloudy();
 
   if (
     text.includes("cloud") ||
     text.includes("overcast")
-  ) return "☁️";
+  ) return iconCloudy();
 
   if (
     text.includes("sunny") ||
     text.includes("clear")
-  ) return "☀️";
+  ) return iconSunny();
 
-  return "🌤️";
+  return iconPartlyCloudy();
 }
 
 
@@ -458,14 +559,12 @@ async function loadWeather() {
     document.getElementById("conditions").textContent =
       current.shortForecast;
 
-    document.getElementById("weatherIcon").textContent =
+    document.getElementById("weatherIcon").innerHTML =
       chooseWeatherIcon(current.shortForecast);
 
     document.getElementById("wind").textContent =
       "Wind " + current.windSpeed + " " + current.windDirection;
 
-
-    /* NEXT 24 HOURS HIGH / LOW */
 
     const next24 = periods
       .slice(0, 24)
@@ -478,8 +577,6 @@ async function loadWeather() {
       `H ${high}°   L ${low}°`;
 
 
-    /* ACTIVE WEATHER ALERTS */
-
     const alertData = await fetch(
       `https://api.weather.gov/alerts/active?point=${latitude},${longitude}`
     ).then(r => r.json());
@@ -491,7 +588,7 @@ async function loadWeather() {
       const alert = alertData.features[0].properties;
 
       alertBox.style.display = "block";
-      alertBox.textContent = "⚠  " + alert.event;
+      alertBox.textContent = "Weather Alert  •  " + alert.event;
 
     } else {
 
@@ -503,7 +600,7 @@ async function loadWeather() {
     document.getElementById("conditions").textContent =
       "Weather temporarily unavailable";
 
-    document.getElementById("weatherIcon").textContent = "—";
+    document.getElementById("weatherIcon").innerHTML = "";
   }
 }
 
