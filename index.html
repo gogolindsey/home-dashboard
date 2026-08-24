@@ -17,77 +17,82 @@ html, body {
   overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
                "Segoe UI", sans-serif;
-  color: #f5f4ef;
+  color: #f7fbff;
   background:
-    radial-gradient(circle at 18% 8%, rgba(101,115,104,.28), transparent 34%),
-    radial-gradient(circle at 88% 90%, rgba(98,84,72,.22), transparent 36%),
-    #111513;
+    radial-gradient(circle at 18% 6%, rgba(0, 122, 255, .16), transparent 34%),
+    radial-gradient(circle at 82% 100%, rgba(0, 210, 255, .06), transparent 34%),
+    #031426;
 }
 
 .dashboard {
   width: 100vw;
   height: 100vh;
-  padding: 18px;
+  padding: 14px;
   display: grid;
   grid-template-rows: 2fr 1fr;
-  gap: 16px;
+  gap: 12px;
 }
 
 .card {
-  background: rgba(35,40,37,.78);
-  border: 1px solid rgba(255,255,255,.09);
-  border-radius: 28px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(7, 39, 72, .96),
+      rgba(3, 22, 42, .98)
+    );
+  border: 1px solid rgba(52, 164, 255, .22);
+  border-radius: 24px;
   box-shadow:
-    0 18px 45px rgba(0,0,0,.18),
+    0 14px 34px rgba(0,0,0,.22),
     inset 0 1px 0 rgba(255,255,255,.04);
-  backdrop-filter: blur(18px);
 }
 
-/* TOP CARD */
+/* TOP */
 
 .topCard {
-  padding: 24px 26px 20px;
+  padding: 22px 24px 18px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .time {
-  font-size: clamp(92px, 18vw, 150px);
+  font-size: clamp(112px, 20vw, 176px);
   font-weight: 220;
-  letter-spacing: -7px;
+  letter-spacing: -8px;
   line-height: .82;
   white-space: nowrap;
+  color: #f8fbff;
 }
 
 .date {
-  margin-top: 18px;
-  font-size: clamp(22px, 3.1vw, 30px);
-  color: #b9c0bb;
+  margin-top: 20px;
+  font-size: clamp(23px, 3.2vw, 32px);
+  color: #9ed2ff;
   font-weight: 400;
 }
 
 .weatherArea {
-  margin-top: 18px;
+  margin-top: 22px;
 }
 
 .weatherRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 18px;
 }
 
 .weatherMain {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
 }
 
 .weatherIcon {
-  width: clamp(62px, 10vw, 88px);
-  height: clamp(62px, 10vw, 88px);
-  color: rgba(245,244,239,.92);
+  width: clamp(74px, 12vw, 104px);
+  height: clamp(74px, 12vw, 104px);
+  color: #ffd54a;
   flex: 0 0 auto;
 }
 
@@ -98,45 +103,61 @@ html, body {
 }
 
 .temp {
-  font-size: clamp(48px, 8vw, 72px);
-  font-weight: 300;
-  line-height: 1;
+  font-size: clamp(62px, 10vw, 90px);
+  font-weight: 280;
+  line-height: .95;
+  color: #ffffff;
 }
 
 .weatherDescription {
-  font-size: clamp(18px, 2.8vw, 23px);
-  color: #d7dbd8;
+  font-size: clamp(19px, 3vw, 25px);
+  color: #eef7ff;
   margin-top: 6px;
 }
 
 .weatherDetails {
   text-align: right;
-  color: #b8c0bb;
-  font-size: clamp(16px, 2.5vw, 20px);
-  line-height: 1.55;
+  color: #9ed2ff;
+  font-size: clamp(17px, 2.6vw, 21px);
+  line-height: 1.65;
+  padding-left: 18px;
+  border-left: 1px solid rgba(52,164,255,.28);
 }
+
+.weatherDetails strong {
+  color: #ffffff;
+}
+
+.weatherDetails .low {
+  color: #18d9ff;
+}
+
+/* ALERT */
 
 .alert {
   display: none;
-  margin-top: 16px;
+  margin-top: 18px;
   padding: 14px 18px;
   border-radius: 16px;
-  background: linear-gradient(
-    135deg,
-    rgba(176, 82, 52, .96),
-    rgba(123, 48, 37, .96)
-  );
-  border: 1px solid rgba(255,220,200,.24);
-  color: #fff7f1;
-  font-size: clamp(15px, 2.4vw, 18px);
-  font-weight: 650;
-  box-shadow: 0 8px 25px rgba(90,35,20,.3);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(70, 16, 45, .98),
+      rgba(39, 12, 35, .98)
+    );
+  border: 1px solid rgba(255, 87, 155, .78);
+  color: #ff78ad;
+  font-size: clamp(16px, 2.5vw, 19px);
+  font-weight: 700;
+  box-shadow:
+    0 0 0 1px rgba(255, 87, 155, .05),
+    0 8px 24px rgba(0,0,0,.2);
 }
 
-/* QUOTE CARD */
+/* QUOTE */
 
 .quoteCard {
-  padding: 24px 26px;
+  padding: 22px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -144,47 +165,47 @@ html, body {
 
 .label {
   text-transform: uppercase;
-  letter-spacing: 2.5px;
+  letter-spacing: 3px;
   font-size: 13px;
-  color: #89938d;
-  font-weight: 650;
+  color: #42c7ff;
+  font-weight: 700;
 }
 
 .quoteMark {
   font-family: Georgia, serif;
-  font-size: 58px;
-  color: #7f9286;
+  font-size: 60px;
+  color: #2ba8ff;
   line-height: .65;
   margin-top: 8px;
 }
 
 .quote {
   font-family: Georgia, serif;
-  font-size: clamp(24px, 4vw, 34px);
-  line-height: 1.18;
-  color: #eceae3;
+  font-size: clamp(25px, 4.2vw, 36px);
+  line-height: 1.16;
+  color: #f8fbff;
   margin-top: 4px;
 }
 
 .author {
   margin-top: 14px;
-  color: #929c96;
-  font-size: clamp(15px, 2.4vw, 18px);
+  color: #4cc5ff;
+  font-size: clamp(15px, 2.4vw, 19px);
 }
 
 @media (max-width: 700px) {
   .dashboard {
-    padding: 14px;
-    gap: 12px;
+    padding: 12px;
+    gap: 10px;
   }
 
   .topCard,
   .quoteCard {
-    padding: 20px;
+    padding: 18px;
   }
 
   .card {
-    border-radius: 24px;
+    border-radius: 21px;
   }
 
   .weatherRow {
@@ -201,7 +222,7 @@ html, body {
   <section class="card topCard">
 
     <div>
-      <div class="time" id="time">11:06 AM</div>
+      <div class="time" id="time">11:28 AM</div>
       <div class="date" id="date">Monday, August 24</div>
     </div>
 
@@ -235,7 +256,6 @@ html, body {
 
   </section>
 
-
   <section class="card quoteCard">
 
     <div class="label">Thought for Today</div>
@@ -249,7 +269,6 @@ html, body {
   </section>
 
 </div>
-
 
 <script>
 
@@ -392,11 +411,9 @@ function iconSnow() {
     <path d="M18 28h27a9 9 0 0 0 0-18
              14 14 0 0 0-26-4
              10 10 0 0 0-1 22z"></path>
-
     <path d="M24 39v14"></path>
     <path d="M18 42l12 8"></path>
     <path d="M30 42l-12 8"></path>
-
     <path d="M42 39v14"></path>
     <path d="M36 42l12 8"></path>
     <path d="M48 42l-12 8"></path>
@@ -473,7 +490,6 @@ async function loadWeather() {
     document.getElementById("wind").textContent =
       "Wind " + current.windSpeed + " " + current.windDirection;
 
-
     const next24 = periods
       .slice(0, 24)
       .map(p => p.temperature);
@@ -481,9 +497,8 @@ async function loadWeather() {
     const high = Math.max(...next24);
     const low = Math.min(...next24);
 
-    document.getElementById("highLow").textContent =
-      `H ${high}°   L ${low}°`;
-
+    document.getElementById("highLow").innerHTML =
+      `<strong>H ${high}°</strong> &nbsp; <span class="low">L ${low}°</span>`;
 
     const alertData = await fetch(
       `https://api.weather.gov/alerts/active?point=${latitude},${longitude}`
@@ -492,14 +507,12 @@ async function loadWeather() {
     const alertBox = document.getElementById("alert");
 
     if (alertData.features.length > 0) {
-
       const alert = alertData.features[0].properties;
 
       alertBox.style.display = "block";
-      alertBox.textContent = "Weather Alert  •  " + alert.event;
+      alertBox.textContent = "⚠  Weather Alert • " + alert.event;
 
     } else {
-
       alertBox.style.display = "none";
     }
 
