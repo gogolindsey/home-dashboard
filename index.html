@@ -8,7 +8,6 @@
 <title>Home Dashboard</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -46,7 +45,6 @@ body {
         );
 }
 
-
 /* ================================
    MAIN DASHBOARD
 ================================ */
@@ -54,18 +52,15 @@ body {
 .dashboard {
     width: 100vw;
     height: 100vh;
-
     padding: 10px;
 
     display: grid;
-
     grid-template-rows:
-        minmax(0, 2fr)
-        minmax(0, 1fr);
+        minmax(0, 2.15fr)
+        minmax(0, 0.85fr);
 
     gap: 9px;
 }
-
 
 /* ================================
    CARDS
@@ -93,127 +88,108 @@ body {
     overflow: hidden;
 }
 
-
 /* ================================
    CLOCK + WEATHER
 ================================ */
 
 .mainCard {
     padding:
-        clamp(15px, 3vh, 25px)
-        clamp(18px, 4vw, 31px);
+        clamp(13px, 2.3vh, 20px)
+        clamp(18px, 3.7vw, 29px);
 
     display: flex;
     flex-direction: column;
-
     justify-content: space-between;
 }
 
+.topRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 22px;
+}
 
 /* CLOCK */
 
 .time {
     font-size:
-        clamp(66px, 15.5vw, 126px);
+        clamp(58px, 12.5vw, 102px);
 
     line-height: 0.88;
-
     font-weight: 250;
-
     letter-spacing: -0.065em;
-
     color: #f5f9fc;
-
     white-space: nowrap;
 
     text-shadow:
         0 2px 18px rgba(100, 180, 235, 0.07);
 }
 
-
 /* DATE */
 
 .date {
-    margin-top: 10px;
+    margin-top: 8px;
 
     font-size:
-        clamp(18px, 3.6vw, 27px);
+        clamp(17px, 3.2vw, 25px);
 
     font-weight: 600;
-
     letter-spacing: -0.015em;
-
     color: #9dbbd2;
 }
 
-
 /* ================================
-   WEATHER
+   CURRENT WEATHER
 ================================ */
 
 .weather {
     display: flex;
     align-items: center;
-
-    width: 100%;
-
-    margin-top: 12px;
+    justify-content: flex-end;
+    min-width: 350px;
 }
-
 
 .weatherPrimary {
     display: flex;
     align-items: center;
-
-    flex: 1;
     min-width: 0;
 }
 
-
 .weatherIcon {
     width:
-        clamp(63px, 12vw, 94px);
+        clamp(54px, 9vw, 77px);
 
     height:
-        clamp(63px, 12vw, 94px);
+        clamp(54px, 9vw, 77px);
 
-    margin-right: 14px;
-
+    margin-right: 12px;
     flex-shrink: 0;
-
     color: #f4c84a;
 }
 
-
 .temperature {
     font-size:
-        clamp(49px, 10vw, 79px);
+        clamp(42px, 7vw, 64px);
 
     line-height: 0.92;
-
     font-weight: 350;
-
     letter-spacing: -0.05em;
-
     color: #f5f9fc;
 }
 
-
 .weatherDescription {
-    margin-top: 5px;
+    margin-top: 4px;
 
     font-size:
-        clamp(17px, 3.2vw, 23px);
+        clamp(15px, 2.4vw, 20px);
 
     font-weight: 600;
-
     color: #d9e6ef;
 }
 
-
 .weatherDetails {
-    margin-left: 17px;
-    padding-left: 17px;
+    margin-left: 15px;
+    padding-left: 15px;
 
     border-left:
         1px solid rgba(89, 150, 198, 0.24);
@@ -221,74 +197,125 @@ body {
     text-align: right;
 
     font-size:
-        clamp(14px, 2.8vw, 20px);
+        clamp(13px, 2.1vw, 18px);
 
     line-height: 1.45;
-
     font-weight: 600;
-
     color: #9dbbd2;
-
     white-space: nowrap;
 }
-
 
 .weatherDetails .high {
     color: #f1f6fa;
 }
 
-
 .weatherDetails .low {
     color: #29b9e1;
 }
 
-
 /* ================================
-   WEATHER ALERT
+   NEXT 5 HOURS
 ================================ */
 
-.alert {
-    display: none;
+.forecastBlock {
+    margin-top: 10px;
+}
 
-    width: 100%;
-
-    margin-top: 13px;
-
-    padding:
-        clamp(10px, 1.8vh, 14px)
-        clamp(13px, 3vw, 19px);
-
-    border-radius: 14px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(53, 22, 48, 0.98),
-            rgba(33, 13, 34, 0.99)
-        );
-
-    border:
-        1px solid rgba(239, 102, 157, 0.72);
-
-    color: #f48ab2;
+.forecastLabel {
+    margin-bottom: 6px;
 
     font-size:
-        clamp(14px, 2.7vw, 19px);
+        clamp(10px, 1.8vw, 13px);
+
+    font-weight: 750;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #47b8df;
+}
+
+.hourlyForecast {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 7px;
+}
+
+.hour {
+    min-width: 0;
+    padding: 7px 5px 6px;
+
+    text-align: center;
+
+    border:
+        1px solid rgba(92, 151, 198, 0.14);
+
+    border-radius: 11px;
+
+    background:
+        rgba(11, 42, 68, 0.52);
+}
+
+.hourTime {
+    font-size:
+        clamp(10px, 1.9vw, 13px);
 
     font-weight: 700;
-
-    letter-spacing: -0.01em;
-
-    box-shadow:
-        0 7px 22px rgba(0, 0, 0, 0.20),
-        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+    color: #9dbbd2;
 }
 
-
-.alert.active {
-    display: block;
+.hourIcon {
+    height: 22px;
+    margin: 2px auto 1px;
+    color: #f4c84a;
 }
 
+.hourTemp {
+    font-size:
+        clamp(15px, 2.8vw, 21px);
+
+    line-height: 1;
+    font-weight: 650;
+    color: #f5f9fc;
+}
+
+.hourRain {
+    margin-top: 2px;
+
+    font-size:
+        clamp(9px, 1.6vw, 11px);
+
+    font-weight: 600;
+    color: #69c5e5;
+}
+
+/* ================================
+   5 DAY OUTLOOK
+================================ */
+
+.outlook {
+    margin-top: 8px;
+
+    padding:
+        7px 10px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(15, 52, 80, 0.45);
+
+    border:
+        1px solid rgba(92, 151, 198, 0.12);
+
+    font-size:
+        clamp(11px, 1.9vw, 14px);
+
+    line-height: 1.25;
+    font-weight: 600;
+    color: #b8cfdf;
+}
+
+.outlook strong {
+    color: #eaf3f8;
+}
 
 /* ================================
    THOUGHT FOR TODAY
@@ -296,49 +323,37 @@ body {
 
 .thoughtCard {
     padding:
-        clamp(15px, 2.5vh, 22px)
+        clamp(13px, 2vh, 19px)
         clamp(18px, 4vw, 30px);
 
     display: flex;
     flex-direction: column;
-
     justify-content: center;
 }
 
-
 .label {
     font-size:
-        clamp(12px, 2.2vw, 16px);
+        clamp(11px, 2vw, 15px);
 
     font-weight: 750;
-
     letter-spacing: 0.18em;
-
     color: #47b8df;
-
     text-transform: uppercase;
 }
 
-
 .quoteMark {
-    height: 24px;
-
-    margin-top: 4px;
+    height: 20px;
+    margin-top: 1px;
 
     font-family: Georgia, serif;
-
-    font-size: 38px;
-
+    font-size: 33px;
     line-height: 1;
-
     color: #2b91c7;
 }
 
-
 .quote {
-    margin-top: 2px;
-
-    max-width: 95%;
+    margin-top: 0;
+    max-width: 98%;
 
     font-family:
         Georgia,
@@ -346,204 +361,206 @@ body {
         serif;
 
     font-size:
-        clamp(20px, 4.2vw, 31px);
+        clamp(18px, 3.6vw, 28px);
 
-    line-height: 1.12;
-
+    line-height: 1.10;
     font-weight: 600;
-
     letter-spacing: -0.025em;
-
     color: #edf4f8;
 }
 
+.quote.medium {
+    font-size:
+        clamp(16px, 3vw, 24px);
+}
+
+.quote.long {
+    font-size:
+        clamp(14px, 2.5vw, 20px);
+}
+
+.quote.veryLong {
+    font-size:
+        clamp(12px, 2vw, 17px);
+}
 
 .author {
-    margin-top: 10px;
+    margin-top: 8px;
 
     font-size:
-        clamp(12px, 2.3vw, 16px);
+        clamp(11px, 2vw, 15px);
 
     font-weight: 600;
-
     color: #42b5dd;
 }
 
-
 /* ================================
-   SMALL SPLIT SCREEN ADJUSTMENTS
+   SMALL SCREEN ADJUSTMENTS
 ================================ */
 
-@media (max-width: 550px) {
-
-    .dashboard {
-        padding: 8px;
-        gap: 7px;
+@media (max-width: 760px) {
+    .topRow {
+        gap: 12px;
     }
 
-    .mainCard {
-        padding: 16px 18px;
-    }
-
-    .thoughtCard {
-        padding: 14px 18px;
-    }
-
-    .time {
-        font-size: clamp(60px, 15vw, 100px);
+    .weather {
+        min-width: 310px;
     }
 
     .weatherDetails {
-        margin-left: 12px;
-        padding-left: 12px;
+        margin-left: 10px;
+        padding-left: 10px;
     }
-
 }
 
+@media (max-width: 610px) {
+    .dashboard {
+        padding: 7px;
+        gap: 6px;
+    }
+
+    .mainCard {
+        padding: 12px 14px;
+    }
+
+    .thoughtCard {
+        padding: 11px 15px;
+    }
+
+    .weather {
+        min-width: 270px;
+    }
+
+    .hourlyForecast {
+        gap: 4px;
+    }
+}
 
 /* ================================
    VERY SHORT SCREEN
 ================================ */
 
 @media (max-height: 500px) {
-
     .dashboard {
-        padding: 6px;
-        gap: 6px;
+        padding: 5px;
+        gap: 5px;
     }
 
     .mainCard {
-        padding: 12px 17px;
+        padding: 9px 14px;
     }
 
     .time {
-        font-size: clamp(57px, 14vw, 94px);
+        font-size: clamp(50px, 11vw, 82px);
     }
 
     .date {
+        margin-top: 4px;
+    }
+
+    .forecastBlock {
         margin-top: 5px;
     }
 
-    .weather {
-        margin-top: 5px;
+    .hour {
+        padding-top: 4px;
+        padding-bottom: 4px;
     }
 
-    .alert {
-        margin-top: 7px;
-        padding-top: 8px;
-        padding-bottom: 8px;
+    .hourIcon {
+        height: 18px;
+    }
+
+    .outlook {
+        margin-top: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 
     .thoughtCard {
-        padding: 11px 18px;
+        padding: 8px 15px;
     }
 
     .author {
-        margin-top: 5px;
+        margin-top: 4px;
     }
-
 }
-
 </style>
 </head>
-
 
 <body>
 
 <div class="dashboard">
 
-
-    <!-- CLOCK + WEATHER -->
-
     <section class="card mainCard">
 
-        <div>
+        <div class="topRow">
 
-            <div
-                class="time"
-                id="time">
-                11:39 AM
+            <div>
+                <div class="time" id="time">8:55 AM</div>
+                <div class="date" id="date">Monday, September 14</div>
             </div>
-
-            <div
-                class="date"
-                id="date">
-                Monday, August 24
-            </div>
-
-        </div>
-
-
-        <div>
 
             <div class="weather">
 
                 <div class="weatherPrimary">
 
-                    <div
-                        class="weatherIcon"
-                        id="weatherIcon">
-                    </div>
+                    <div class="weatherIcon" id="weatherIcon"></div>
 
                     <div>
-
-                        <div
-                            class="temperature"
-                            id="temperature">
-                            94°
+                        <div class="temperature" id="temperature">--°</div>
+                        <div class="weatherDescription" id="weatherDescription">
+                            Loading weather…
                         </div>
-
-                        <div
-                            class="weatherDescription"
-                            id="weatherDescription">
-                            Sunny
-                        </div>
-
                     </div>
 
                 </div>
 
-
                 <div class="weatherDetails">
 
                     <div>
-
                         <span class="high">
-                            H <span id="highTemp">104°</span>
+                            H <span id="highTemp">--°</span>
                         </span>
 
                         &nbsp;
 
                         <span class="low">
-                            L <span id="lowTemp">72°</span>
+                            L <span id="lowTemp">--°</span>
                         </span>
-
                     </div>
 
                     <div id="wind">
-                        Wind 10 mph SSW
+                        Wind --
                     </div>
 
                 </div>
 
             </div>
 
+        </div>
 
-            <div
-                class="alert active"
-                id="weatherAlert">
+        <div>
 
-                △ Weather Alert • Extreme Heat Watch
+            <div class="forecastBlock">
 
+                <div class="forecastLabel">
+                    Next 5 Hours
+                </div>
+
+                <div class="hourlyForecast" id="hourlyForecast">
+                    <div class="hour">Loading…</div>
+                </div>
+
+            </div>
+
+            <div class="outlook" id="outlook">
+                <strong>5 Day Outlook:</strong> Loading forecast…
             </div>
 
         </div>
 
     </section>
-
-
-
-    <!-- THOUGHT FOR TODAY -->
 
     <section class="card thoughtCard">
 
@@ -555,29 +572,31 @@ body {
             “
         </div>
 
-        <div
-            class="quote"
-            id="quote">
-
-            The creation of a thousand forests is in one acorn.
-
+        <div class="quote" id="quote">
+            Loading today’s thought…
         </div>
 
-        <div
-            class="author"
-            id="author">
-
-            — Ralph Waldo Emerson
-
-        </div>
+        <div class="author" id="author"></div>
 
     </section>
 
-
 </div>
 
-
+<script src="quotes.js"></script>
 <script>
+
+/* ================================
+   SETTINGS
+
+   These coordinates are centered on
+   Santa Clarita, California.
+
+   You do not need an API key.
+================================ */
+
+const LATITUDE = 34.3917;
+const LONGITUDE = -118.5426;
+const TIME_ZONE = "America/Los_Angeles";
 
 /* ================================
    CLOCK
@@ -607,21 +626,15 @@ function updateClock() {
         );
 
     document.getElementById("time").textContent = time;
-
     document.getElementById("date").textContent = date;
 }
 
-
 updateClock();
-
 setInterval(updateClock, 1000);
-
 
 
 /* ================================
    WEATHER ICONS
-   Clean line icons designed to
-   visually match the Alexa UI.
 ================================ */
 
 const icons = {
@@ -652,7 +665,6 @@ const icons = {
         </svg>
     `,
 
-
     cloudy: `
         <svg viewBox="0 0 110 80"
              width="100%"
@@ -677,7 +689,6 @@ const icons = {
 
         </svg>
     `,
-
 
     partlyCloudy: `
         <svg viewBox="0 0 110 90"
@@ -711,7 +722,6 @@ const icons = {
         </svg>
     `,
 
-
     rain: `
         <svg viewBox="0 0 110 100"
              width="100%"
@@ -739,165 +749,649 @@ const icons = {
             <line x1="79" y1="69" x2="74" y2="83"/>
 
         </svg>
-    `
+    `,
 
+    storm: `
+        <svg viewBox="0 0 110 105"
+             width="100%"
+             height="100%"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="4"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+
+            <path d="
+                M27 55
+                H83
+                C94 55 100 48 100 39
+                C100 30 93 23 84 23
+                C81 12 72 7 61 7
+                C48 7 39 15 36 26
+                C33 24 29 23 25 23
+                C15 23 8 31 8 40
+                C8 49 15 55 27 55
+            "/>
+
+            <polyline points="57,63 45,82 57,82 48,99"/>
+
+        </svg>
+    `
 };
 
 
-
 /* ================================
-   WEATHER ICON SELECTOR
+   WEATHER CODE TRANSLATOR
 ================================ */
 
-function setWeatherIcon(condition) {
+function weatherInfo(code) {
 
-    const icon =
-        document.getElementById("weatherIcon");
+    if (code === 0) {
+        return {
+            label: "Clear",
+            icon: "sunny",
+            color: "#f4c84a"
+        };
+    }
 
-    const value =
-        condition.toLowerCase();
+    if (code === 1 || code === 2) {
+        return {
+            label: code === 1 ? "Mostly Sunny" : "Partly Cloudy",
+            icon: "partlyCloudy",
+            color: "#d8dce0"
+        };
+    }
 
+    if (code === 3) {
+        return {
+            label: "Cloudy",
+            icon: "cloudy",
+            color: "#b7c9d7"
+        };
+    }
+
+    if ([45, 48].includes(code)) {
+        return {
+            label: "Fog",
+            icon: "cloudy",
+            color: "#b7c9d7"
+        };
+    }
 
     if (
-        value.includes("rain") ||
-        value.includes("shower")
+        [51, 53, 55, 56, 57, 61, 63, 65, 66, 67,
+         80, 81, 82, 85, 86].includes(code)
     ) {
-
-        icon.innerHTML = icons.rain;
-
-        icon.style.color = "#9fc7df";
-
+        return {
+            label: "Rain",
+            icon: "rain",
+            color: "#9fc7df"
+        };
     }
 
-    else if (
-        value.includes("partly") ||
-        value.includes("mostly sunny")
-    ) {
-
-        icon.innerHTML = icons.partlyCloudy;
-
-        icon.style.color = "#d8dce0";
-
+    if ([71, 73, 75, 77].includes(code)) {
+        return {
+            label: "Snow",
+            icon: "cloudy",
+            color: "#dcecf6"
+        };
     }
 
-    else if (
-        value.includes("cloud") ||
-        value.includes("overcast")
-    ) {
-
-        icon.innerHTML = icons.cloudy;
-
-        icon.style.color = "#b7c9d7";
-
+    if ([95, 96, 99].includes(code)) {
+        return {
+            label: "Thunderstorms",
+            icon: "storm",
+            color: "#d6c4ff"
+        };
     }
 
-    else {
-
-        icon.innerHTML = icons.sunny;
-
-        icon.style.color = "#f4c84a";
-
-    }
-
+    return {
+        label: "Mixed Conditions",
+        icon: "partlyCloudy",
+        color: "#d8dce0"
+    };
 }
 
 
+function setWeatherIcon(element, code) {
 
-/* Current condition shown until
-   your existing weather API updates it */
+    const info = weatherInfo(code);
 
-setWeatherIcon(
-    document.getElementById(
-        "weatherDescription"
-    ).textContent
-);
-
+    element.innerHTML = icons[info.icon];
+    element.style.color = info.color;
+}
 
 
 /* ================================
-   WEATHER UPDATE HELPER
-
-   Your existing weather API can
-   call this function with live data.
+   WIND DIRECTION
 ================================ */
 
-function updateWeather(data) {
+function compassDirection(degrees) {
 
-    if (data.temperature !== undefined) {
+    const directions = [
+        "N", "NNE", "NE", "ENE",
+        "E", "ESE", "SE", "SSE",
+        "S", "SSW", "SW", "WSW",
+        "W", "WNW", "NW", "NNW"
+    ];
+
+    const index =
+        Math.round(degrees / 22.5) % 16;
+
+    return directions[index];
+}
+
+
+/* ================================
+   NEXT 5 HOURS
+================================ */
+
+function renderHourlyForecast(data) {
+
+    const container =
+        document.getElementById("hourlyForecast");
+
+    container.innerHTML = "";
+
+    const currentHour =
+        data.current.time.slice(0, 13) + ":00";
+
+    let startIndex =
+        data.hourly.time.findIndex(
+            time => time >= currentHour
+        );
+
+    if (startIndex < 0) {
+        startIndex = 0;
+    }
+
+    const count =
+        Math.min(
+            5,
+            data.hourly.time.length - startIndex
+        );
+
+    for (let offset = 0; offset < count; offset++) {
+
+        const index = startIndex + offset;
+
+        const time =
+            new Date(
+                data.hourly.time[index]
+            ).toLocaleTimeString(
+                [],
+                {
+                    hour: "numeric"
+                }
+            );
+
+        const temp =
+            Math.round(
+                data.hourly.temperature_2m[index]
+            );
+
+        const code =
+            data.hourly.weather_code[index];
+
+        const rain =
+            data.hourly.precipitation_probability[index] ?? 0;
+
+        const info =
+            weatherInfo(code);
+
+        const hour =
+            document.createElement("div");
+
+        hour.className = "hour";
+
+        hour.innerHTML = `
+            <div class="hourTime">${time}</div>
+
+            <div
+                class="hourIcon"
+                style="color:${info.color}">
+                ${icons[info.icon]}
+            </div>
+
+            <div class="hourTemp">
+                ${temp}°
+            </div>
+
+            <div class="hourRain">
+                ${rain > 0 ? rain + "% rain" : "Dry"}
+            </div>
+        `;
+
+        container.appendChild(hour);
+    }
+}
+
+
+/* ================================
+   5 DAY OUTLOOK
+================================ */
+
+function dayName(dateString) {
+
+    return new Date(
+        dateString + "T12:00:00"
+    ).toLocaleDateString(
+        [],
+        {
+            weekday: "long"
+        }
+    );
+}
+
+
+function buildFiveDayOutlook(data) {
+
+    const days = 5;
+
+    const dates =
+        data.daily.time.slice(0, days);
+
+    const highs =
+        data.daily.temperature_2m_max
+            .slice(0, days)
+            .map(Math.round);
+
+    const lows =
+        data.daily.temperature_2m_min
+            .slice(0, days)
+            .map(Math.round);
+
+    const rain =
+        data.daily.precipitation_probability_max
+            .slice(0, days);
+
+    const codes =
+        data.daily.weather_code
+            .slice(0, days);
+
+    const firstHigh = highs[0];
+    const lastHigh = highs[highs.length - 1];
+
+    const maxHigh = Math.max(...highs);
+    const minHigh = Math.min(...highs);
+
+    const maxIndex = highs.indexOf(maxHigh);
+    const minIndex = highs.indexOf(minHigh);
+
+    let temperatureSentence = "";
+
+    if (
+        maxIndex > 0 &&
+        maxIndex < days - 1 &&
+        maxHigh - firstHigh >= 5 &&
+        maxHigh - lastHigh >= 5
+    ) {
+        temperatureSentence =
+            `Warming through ${dayName(dates[maxIndex])}, then cooling later in the period.`;
+    }
+
+    else if (
+        minIndex > 0 &&
+        minIndex < days - 1 &&
+        firstHigh - minHigh >= 5 &&
+        lastHigh - minHigh >= 5
+    ) {
+        temperatureSentence =
+            `Cooling through ${dayName(dates[minIndex])}, then warming again.`;
+    }
+
+    else if (lastHigh - firstHigh >= 5) {
+        temperatureSentence =
+            "A warming trend is expected over the next 5 days.";
+    }
+
+    else if (firstHigh - lastHigh >= 5) {
+        temperatureSentence =
+            "A cooling trend is expected over the next 5 days.";
+    }
+
+    else if (maxHigh - minHigh <= 5) {
+        temperatureSentence =
+            "Temperatures should stay fairly steady over the next 5 days.";
+    }
+
+    else {
+        temperatureSentence =
+            "Temperatures will vary a bit over the next 5 days.";
+    }
+
+
+    const wetIndexes = [];
+
+    for (let i = 0; i < days; i++) {
+
+        const wetCode =
+            [51, 53, 55, 56, 57, 61, 63, 65, 66, 67,
+             80, 81, 82, 95, 96, 99]
+            .includes(codes[i]);
+
+        if (rain[i] >= 35 || wetCode) {
+            wetIndexes.push(i);
+        }
+    }
+
+
+    let precipitationSentence = "";
+
+    if (wetIndexes.length === 0) {
+        precipitationSentence =
+            "No meaningful rain signal is showing right now.";
+    }
+
+    else if (wetIndexes.length === 1) {
+        precipitationSentence =
+            `The best chance of rain is around ${dayName(dates[wetIndexes[0]])}.`;
+    }
+
+    else {
+        const firstWet =
+            dayName(dates[wetIndexes[0]]);
+
+        const lastWet =
+            dayName(
+                dates[
+                    wetIndexes[
+                        wetIndexes.length - 1
+                    ]
+                ]
+            );
+
+        precipitationSentence =
+            firstWet === lastWet
+                ? `Rain is possible around ${firstWet}.`
+                : `Rain chances appear from ${firstWet} into ${lastWet}.`;
+    }
+
+
+    const rangeHigh =
+        Math.max(...highs);
+
+    const rangeLow =
+        Math.min(...lows);
+
+    return (
+        temperatureSentence +
+        " " +
+        precipitationSentence +
+        ` Forecast range: ${rangeLow}° to ${rangeHigh}°.`
+    );
+}
+
+
+/* ================================
+   WEATHER FETCH
+   Open-Meteo
+   No account or API key required.
+================================ */
+
+async function updateWeather() {
+
+    const params =
+        new URLSearchParams({
+            latitude: LATITUDE,
+            longitude: LONGITUDE,
+
+            current:
+                "temperature_2m,weather_code,wind_speed_10m,wind_direction_10m",
+
+            hourly:
+                "temperature_2m,weather_code,precipitation_probability",
+
+            daily:
+                "weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max",
+
+            temperature_unit: "fahrenheit",
+            wind_speed_unit: "mph",
+            timezone: TIME_ZONE,
+            forecast_days: "6"
+        });
+
+    const url =
+        "https://api.open-meteo.com/v1/forecast?" +
+        params.toString();
+
+    try {
+
+        const response =
+            await fetch(
+                url,
+                {
+                    cache: "no-store"
+                }
+            );
+
+        if (!response.ok) {
+            throw new Error(
+                "Weather request failed"
+            );
+        }
+
+        const data =
+            await response.json();
+
+
+        const currentInfo =
+            weatherInfo(
+                data.current.weather_code
+            );
 
         document.getElementById(
             "temperature"
         ).textContent =
-            data.temperature + "°";
-
-    }
-
-
-    if (data.condition) {
+            Math.round(
+                data.current.temperature_2m
+            ) + "°";
 
         document.getElementById(
             "weatherDescription"
         ).textContent =
-            data.condition;
+            currentInfo.label;
 
-        setWeatherIcon(data.condition);
+        setWeatherIcon(
+            document.getElementById(
+                "weatherIcon"
+            ),
+            data.current.weather_code
+        );
 
-    }
-
-
-    if (data.high !== undefined) {
 
         document.getElementById(
             "highTemp"
         ).textContent =
-            data.high + "°";
-
-    }
-
-
-    if (data.low !== undefined) {
+            Math.round(
+                data.daily.temperature_2m_max[0]
+            ) + "°";
 
         document.getElementById(
             "lowTemp"
         ).textContent =
-            data.low + "°";
+            Math.round(
+                data.daily.temperature_2m_min[0]
+            ) + "°";
 
-    }
 
+        const windSpeed =
+            Math.round(
+                data.current.wind_speed_10m
+            );
 
-    if (data.wind) {
+        const windDirection =
+            compassDirection(
+                data.current.wind_direction_10m
+            );
 
         document.getElementById(
             "wind"
         ).textContent =
-            data.wind;
+            `Wind ${windSpeed} mph ${windDirection}`;
+
+
+        renderHourlyForecast(data);
+
+
+        document.getElementById(
+            "outlook"
+        ).innerHTML =
+            "<strong>5 Day Outlook:</strong> " +
+            buildFiveDayOutlook(data);
 
     }
 
+    catch (error) {
 
-    const alert =
-        document.getElementById(
-            "weatherAlert"
+        console.error(
+            "Weather error:",
+            error
         );
 
+        document.getElementById(
+            "weatherDescription"
+        ).textContent =
+            "Weather unavailable";
 
-    if (data.alert) {
-
-        alert.textContent =
-            "△ Weather Alert • " +
-            data.alert;
-
-        alert.classList.add("active");
-
+        document.getElementById(
+            "outlook"
+        ).innerHTML =
+            "<strong>5 Day Outlook:</strong> Unable to refresh weather right now.";
     }
-
-    else {
-
-        alert.classList.remove("active");
-
-    }
-
 }
+
+
+updateWeather();
+
+/* Refresh weather every 15 minutes. */
+setInterval(
+    updateWeather,
+    15 * 60 * 1000
+);
+
+
+/* ================================
+   365 DAILY QUOTES
+
+   These are the quotes you supplied.
+   They are stored directly in this
+   page, so the quote does not depend
+   on another website staying online.
+================================ */
+
+
+
+/* ================================
+   DAILY QUOTE SELECTOR
+
+   Uses a fixed non-leap calendar so
+   each month/day always gets the same
+   quote. On Feb 29, the Feb 28 quote
+   is shown.
+================================ */
+
+function quoteIndexForToday() {
+
+    const now =
+        new Date();
+
+    let month =
+        now.getMonth();
+
+    let day =
+        now.getDate();
+
+    if (
+        month === 1 &&
+        day === 29
+    ) {
+        day = 28;
+    }
+
+    const fixedYear =
+        2025;
+
+    const start =
+        Date.UTC(
+            fixedYear,
+            0,
+            1
+        );
+
+    const current =
+        Date.UTC(
+            fixedYear,
+            month,
+            day
+        );
+
+    return Math.floor(
+        (current - start) / 86400000
+    );
+}
+
+
+function updateQuote() {
+
+    const index =
+        quoteIndexForToday();
+
+    const item =
+        QUOTES[index] ||
+        QUOTES[0];
+
+    const quoteElement =
+        document.getElementById("quote");
+
+    quoteElement.textContent =
+        item.quote;
+
+    document.getElementById(
+        "author"
+    ).textContent =
+        item.author
+            ? "— " + item.author
+            : "";
+
+
+    quoteElement.classList.remove(
+        "medium",
+        "long",
+        "veryLong"
+    );
+
+    const length =
+        item.quote.length;
+
+    if (length > 340) {
+        quoteElement.classList.add(
+            "veryLong"
+        );
+    }
+
+    else if (length > 235) {
+        quoteElement.classList.add(
+            "long"
+        );
+    }
+
+    else if (length > 145) {
+        quoteElement.classList.add(
+            "medium"
+        );
+    }
+}
+
+
+updateQuote();
+
+/* Re-check once a minute so the quote
+   automatically changes after midnight. */
+setInterval(
+    updateQuote,
+    60 * 1000
+);
 
 </script>
 
